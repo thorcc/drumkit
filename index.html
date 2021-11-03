@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100vh;
+        }
+        #app>div{
+            border: solid 3px black;
+            text-align: center;
+            width: 150px;
+        }
+        #app>.active{
+            border-color: gold;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div data-tast="a" data-lyd="tromme1.mp3">
+            <h2>A</h2>
+            <p>Hi-hat</p>
+        </div>
+        <div data-tast="s" data-lyd="tromme2.mp3">
+            <h2>S</h2>
+            <p>Hi-hat</p>
+        </div>
+        <div data-tast="d" data-lyd="tromme3.mp3">
+            <h2>D</h2>
+            <p>Hi-hat</p>
+        </div>
+        <div data-tast="f" data-lyd="tromme4.mp3">
+            <h2>F</h2>
+            <p>Hi-hat</p>
+        </div>
+        <div data-tast="g" data-lyd="tromme5.mp3">
+            <h2>G</h2>
+            <p>Hi-hat</p>
+        </div>
+        <div data-tast="h" data-lyd="tromme6.mp3">
+            <h2>H</h2>
+            <p>Hi-hat</p>
+        </div>
+    </div>
+
+    <audio src=""></audio>
+
+    <script>
+        const trommer = document.querySelectorAll("#app>div");
+        const lyd = document.querySelector("audio");
+        
+        window.onkeydown = (hendelse) => {
+            console.log(hendelse.key)
+            const tast = hendelse.key;
+            for(let tromme of trommer){
+                if(tast === tromme.dataset.tast){
+                    tromme.classList.add("active");
+                    lyd.currentTime = 0;
+                    lyd.src = `lyder/${tromme.dataset.lyd}`;
+                    lyd.play();
+                }
+            }
+        }
+
+        window.onkeyup = () => {
+            for(let tromme of trommer){
+                tromme.classList.remove("active");
+            }
+        }
+    </script>
+</body>
+</html>
